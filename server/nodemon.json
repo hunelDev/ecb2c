@@ -1,0 +1,6 @@
+{
+  "ext": "js",
+  "watch": ["./dist"],
+  "exec": "node ./dist/app.js",
+  "ignore": ["node_modules", "src"]
+}
