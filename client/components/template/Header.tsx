@@ -8,7 +8,7 @@ type HeaderAttributes = {
 };
 const Header: FC<HeaderAttributes> = ({ user }) => {
   return (
-    <div>
+    <header>
       <div className="w-full bg-white shadow border border-gray-50 p-1 justify-center flex relative">
         <div className="w-4/5">
           <ul className="flex justify-end">
@@ -154,7 +154,7 @@ const Header: FC<HeaderAttributes> = ({ user }) => {
           </ul>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

@@ -20,7 +20,7 @@ const App: FC = ({ children }) => {
   }, []);
 
   return (
-    <div>
+    <div className="font-openSans">
       <Header user={context.user} />
       <main className="min-h-[1200px]">{children}</main>
       <Footer />
