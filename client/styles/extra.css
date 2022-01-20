@@ -1,0 +1,16 @@
+@keyframes cey {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -100%);
+  }
+}
+.cey {
+  animation-name: cey;
+  animation-fill-mode: forwards;
+  animation-duration: 0.3s;
+}
