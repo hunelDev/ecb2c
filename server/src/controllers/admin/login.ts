@@ -3,36 +3,36 @@ import jwt from 'jsonwebtoken';
 import fs from 'fs';
 import { join } from 'path';
 import ms from 'ms';
-import { createHash } from '../utils/general';
-import User from '../models/User';
+import { createHash } from '../../utils/general';
+import Admin from '../../models/admin/Admin';
 
 export const login: RequestHandler = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (email == '' || password == '') throw new Error('empty input');
 
-    const user = await User.findOne({
+    const admin = await Admin.findOne({
       where: {
         email,
       },
       raw: true,
     });
 
-    if (!user) throw new Error('this email adress is not exists');
+    if (!admin) throw new Error('this email adress is not exists');
 
-    if (user.password !== createHash(password))
+    if (admin.password !== createHash(password))
       throw new Error('password is not correct');
 
     const { SESSION_COOKIE_EXP_TIME } = process.env;
     const exp = SESSION_COOKIE_EXP_TIME ?? '1d';
 
     const privateKey = fs.readFileSync(
-      join(__dirname, '..', 'rsa', 'private.key')
+      join(__dirname, '..', '..', 'rsa', 'private.key')
     );
 
     const token = jwt.sign(
       {
-        id: user.id,
+        id: admin.id,
         email,
       },
       privateKey,
@@ -43,22 +43,22 @@ export const login: RequestHandler = async (req, res) => {
       }
     );
 
-    res.cookie('token', token, {
+    res.cookie('hToken', token, {
       secure: true,
       sameSite: true,
       maxAge: ms(exp),
     });
 
-    const { id, name, lastname, email: userEmail } = user;
+    const { id, name, lastname, email: adminEmail } = admin;
 
     res.send({
       error: 0,
       token,
-      user: {
+      admin: {
         id,
         name,
         lastname,
-        email: userEmail,
+        email: adminEmail,
       },
     });
   } catch (e: any) {

@@ -1,10 +1,9 @@
 import Link from 'next/link';
 import { FC } from 'react';
-import { FaSearch } from 'react-icons/fa';
-import { FaUser } from 'react-icons/fa';
+import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa';
 
 type HeaderAttributes = {
-  user: string | null;
+  user: { [p: string]: string } | null;
 };
 const Header: FC<HeaderAttributes> = ({ user }) => {
   return (
@@ -69,6 +68,22 @@ const Header: FC<HeaderAttributes> = ({ user }) => {
             <div className="shrink-0 ml-6">
               <Link href={user ? '/profile' : '/login'}>
                 <a>
+                  <div className="border-2 border-[#0071bc] rounded-full flex justify-between px-6 py-1.5 text-[#0071bc]">
+                    <div className="mr-3 self-center">
+                      <FaShoppingCart className="text-2xl inline-block" />
+                    </div>
+                    <div className="text-center self-center py-2">
+                      <span className="block leading-5 font-semibold">
+                        Sepetim
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              </Link>
+            </div>
+            <div className="shrink-0 ml-6">
+              <Link href={user ? '/profile' : '/login'}>
+                <a>
                   <div className="border-2 border-gray-300 rounded-full flex justify-between px-6 py-1.5">
                     <div className="mr-3 self-center">
                       <FaUser className="text-2xl text-gray-500 inline-block" />
@@ -78,7 +93,7 @@ const Header: FC<HeaderAttributes> = ({ user }) => {
                         {user ? `HESABIM` : `Giriş Yap`}
                       </span>
                       <span className="block leading-4 text-xs">
-                        {user ?? `Kayıt Ol`}
+                        {user ? `${user.name} ${user.lastname}` : `Kayıt Ol`}
                       </span>
                     </div>
                   </div>

@@ -2,10 +2,8 @@ const express = require('express');
 const http = require('http');
 const next = require('next').default;
 const { createProxyMiddleware } = require('http-proxy-middleware');
-require('dotenv').config();
 
-const { MODE } = process.env;
-const dev = MODE !== 'production';
+const dev = process.env.NODE_ENV !== 'production';
 const app = next({
   dev,
 });

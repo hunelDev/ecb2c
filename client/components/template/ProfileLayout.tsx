@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { FC, useContext } from 'react';
+import { FC, useContext, useState } from 'react';
 import { FiShoppingBag } from 'react-icons/fi';
 import { GrUserSettings } from 'react-icons/gr';
 import { GeneralContext } from '../GeneralContext';
@@ -8,6 +8,7 @@ import App from './App';
 
 const ProfileLayout: FC = ({ children }) => {
   const context = useContext<any>(GeneralContext);
+
   return (
     <>
       <Head>
@@ -22,7 +23,7 @@ const ProfileLayout: FC = ({ children }) => {
           <aside className="w-1/5">
             <div className="px-8 border-r border-gray-300">
               <div className="text-gray-600">
-                <strong>{context.user}</strong>
+                <strong>{`${context.user?.name} ${context.user?.lastname}`}</strong>
               </div>
               <div className="py-4">
                 <div className="flex my-4">

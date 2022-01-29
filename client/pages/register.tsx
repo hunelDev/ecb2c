@@ -8,7 +8,7 @@ import {
 } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { api } from '../utils/general';
+import { api } from '../utils/api';
 
 const Register: NextPage = () => {
   const ref = useRef<HTMLInputElement>(null);
@@ -48,7 +48,7 @@ const Register: NextPage = () => {
     if (process === 1) return;
     if (name == '' || lastname == '' || email == '' || password == '') return;
     setProcess(1);
-    api
+    api()
       .post('/register', {
         name,
         lastname,

@@ -1,17 +1,15 @@
 import { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FormEventHandler, useContext, useState } from 'react';
-import { GeneralContext } from '../components/GeneralContext';
-import { api } from '../utils/api';
-import { checkToken } from '../utils/general';
+import { FormEventHandler, useState } from 'react';
+import { api } from '../../utils/api';
+import { checkToken } from '../../utils/general';
 
 const Login: NextPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [process, setProcess] = useState<number>(0);
-  const context = useContext<any>(GeneralContext);
+  const [password, setPassword] = useState('');
+  const [process, setProcess] = useState(0);
 
   const submitHandler: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -20,15 +18,14 @@ const Login: NextPage = () => {
 
     setProcess(1);
     await api()
-      .post('/login', {
+      .post('/admin/login', {
         email,
         password,
       })
       .then(({ data }) => {
         setProcess(0);
-        if (data.user) {
-          context.setUser(data.user);
-          router.back();
+        if (data.admin) {
+          router.push('/admin');
         }
       })
       .catch(() => setProcess(0));
@@ -37,28 +34,8 @@ const Login: NextPage = () => {
   return (
     <div>
       <div className="bg-white p-12 shadow mb-8 flex">
-        <div className="mr-auto">
-          <Link href="/">HOME</Link>
-        </div>
         <div>
-          <Link href="/login">
-            <a
-              className={`${
-                router.route === '/login' ? 'bg-indigo-200' : 'bg-white'
-              } hover:bg-indigo-100 border border-indigo-400 px-2 py-2 text text-indigo-400 rounded-sm mx-1`}
-            >
-              Giriş Yap
-            </a>
-          </Link>
-          <Link href="/register">
-            <a
-              className={`hover:bg-green-200 ${
-                router.route === '/register' ? 'bg-green-200' : 'bg-white'
-              } duration-300 border border-green-500 px-2 py-2 text text-green-500 rounded-sm mx-1`}
-            >
-              Kayıt Ol
-            </a>
-          </Link>
+          <Link href="/">HOME</Link>
         </div>
       </div>
       <div className="flex justify-center font-openSans">
@@ -99,21 +76,21 @@ const Login: NextPage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  console.log;
-  const guess = await checkToken(req, false);
+// export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
-  if (!guess)
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
+//   const guess = await checkToken(req, false);
 
-  return {
-    props: {},
-  };
-};
+//   if (!guess)
+//     return {
+//       redirect: {
+//         destination: '/',
+//         permanent: false,
+//       },
+//     };
+
+//   return {
+//     props: {},
+//   };
+// };
 
 export default Login;

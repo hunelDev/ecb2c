@@ -2,26 +2,29 @@
   "name": "client",
   "private": true,
   "scripts": {
-    "dev": "node ./server.js MODE=development",
+    "dev": "node ./server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node ./server.js",
     "lint": "next lint"
   },
   "dependencies": {
+    "@farbenmeer/react-spring-slider": "^1.5.2",
     "axios": "^0.24.0",
     "dotenv": "^11.0.0",
     "express": "^4.17.2",
     "http-proxy-middleware": "^2.0.1",
-    "next": "12.0.7",
+    "next": "^12.0.8",
     "react": "17.0.2",
+    "react-calendar": "^3.6.0",
     "react-cookie": "^4.1.1",
     "react-dom": "17.0.2",
-    "react-icons": "^4.3.1",
-    "swr": "^1.1.2"
+    "react-icons": "^4.3.1"
   },
   "devDependencies": {
+    "@types/next": "^9.0.0",
     "@types/node": "17.0.8",
     "@types/react": "17.0.38",
+    "@types/react-calendar": "^3.4.5",
     "@types/react-dom": "^17.0.11",
     "autoprefixer": "^10.4.2",
     "eslint": "8.6.0",

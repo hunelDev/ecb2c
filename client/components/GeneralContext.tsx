@@ -1,17 +1,19 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
-import { api } from '../utils/general';
+import { api } from '../utils/api';
+import { getCookie } from '../utils/general';
 
 export const GeneralContext = React.createContext({});
 
 const General: FC = ({ children }) => {
   const [user, setUser] = useState<string | null>(null);
-  const [cookies] = useCookies(['token']);
 
   useEffect(() => {
-    if (cookies.token && !user)
-      api.get('/user-check').then(({ data }) => setUser(data.name));
-  }, []);
+    if ((getCookie('token') && !user) || (!getCookie('token') && user)) {
+      api()
+        .get('/user-check')
+        .then(({ data }) => setUser(data.result));
+    }
+  }, [getCookie('token')]);
 
   return (
     <GeneralContext.Provider
