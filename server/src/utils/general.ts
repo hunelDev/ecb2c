@@ -27,3 +27,33 @@ export function veryToken(token: string) {
     return false;
   }
 }
+
+export function replaceAll(
+  search: (string | RegExp)[],
+  replace: string[],
+  subject: string,
+  flag: string = 'gi'
+) {
+  search.forEach((val, key) => {
+    subject = subject.replace(new RegExp(val, flag), replace[key] ?? val);
+  });
+
+  return subject;
+}
+
+export function slug(value: string) {
+  const search = [
+    "[\\.'^\\+%&\\/\\(\\)=?\\|\\-_@\\¨;,`:\\*]",
+    'ç',
+    'ğ',
+    'ı',
+    'İ',
+    'ö',
+    'ş',
+    'ü',
+    ' ',
+    '^-+|-+$',
+  ];
+  const replace = ['', 'c', 'g', 'i', 'i', 'o', 's', 'u', '-', ''];
+  return replaceAll(search, replace, value).toLocaleLowerCase();
+}

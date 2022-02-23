@@ -22,9 +22,10 @@ module.exports = {
       },
       zIndex: {
         100: '100',
+        200: '200',
       },
       keyframes: {
-        fromTopShow: {
+        fromTopLeftShow: {
           from: {
             opacity: 0,
             transform: 'translate(-50%,-100%)',
@@ -36,7 +37,8 @@ module.exports = {
         },
       },
       animation: {
-        fromTopShow: 'fromTopShow 0.3s ease-in-out forwards',
+        fromTopLeftShow: 'fromTopLeftShow 0.3s ease-in-out forwards',
+        spin: 'spin 0.8s linear infinite',
       },
     },
   },

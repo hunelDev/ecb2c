@@ -4,6 +4,7 @@ import baseRouter from './routes/base';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import adminRouter from './routes/admin';
+import Image from './models/admin/Image';
 
 const app = express();
 app.disable('x-powered-by');
@@ -11,6 +12,7 @@ app.disable('x-powered-by');
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   res.send({
     user: res.locals.user,
+    error: 1,
     message: err.message,
   });
 };

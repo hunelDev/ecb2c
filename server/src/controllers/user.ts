@@ -41,7 +41,7 @@ const create: RequestHandler = async (req, res) => {
   }
 };
 
-const update: RequestHandler = async (req, res) => {
+const update: RequestHandler = async (req, res, next) => {
   try {
     const { name, lastname, birthday, phone, email } = req.body;
 
@@ -77,10 +77,7 @@ const update: RequestHandler = async (req, res) => {
       result: updatedUser,
     });
   } catch (e: any) {
-    res.send({
-      error: 1,
-      message: e.message,
-    });
+    next('an error has occurred');
   }
 };
 

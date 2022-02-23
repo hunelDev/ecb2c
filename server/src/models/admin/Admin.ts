@@ -1,5 +1,14 @@
-import { Optional, Model, DataTypes } from 'sequelize';
+import {
+  Optional,
+  Model,
+  DataTypes,
+  HasManyAddAssociationsMixin,
+  Association,
+  HasManyCreateAssociationMixin,
+  HasManyRemoveAssociationMixin,
+} from 'sequelize';
 import sequelize from '../../providers/database';
+import Image from './Image';
 
 interface AdminAttributes {
   id?: number;
@@ -23,6 +32,13 @@ class Admin
 
   declare readonly createdAt: Date;
   declare readonly updatedAt: Date;
+
+  declare createImage: HasManyCreateAssociationMixin<Image>;
+  declare removeImage: HasManyRemoveAssociationMixin<Image, number>;
+  declare images?: Image[];
+  declare static association: {
+    images: Association<Admin, Image>;
+  };
 }
 
 Admin.init(

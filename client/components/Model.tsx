@@ -40,8 +40,8 @@ const Model: FC<ModelAttribtues> = ({
     <div className="model">
       <div className="fixed bg-[rgba(43,43,43,0.6)] w-full h-full top-0 left-0"></div>
       <div
-        className={`z-100 absolute top-[100px] left-1/2 bg-white font-exo2 min-w-[15rem] animate-fromTopShow max-w-lg ${
-          isClosing ? 'cey' : ''
+        className={`z-100 absolute top-[100px] left-1/2 bg-white font-exo2 min-w-[15rem] animate-fromTopLeftShow${
+          isClosing ? ' cey' : ''
         }`}
         onAnimationEnd={animationEndHandler}
       >
