@@ -110,7 +110,7 @@ const destroy: RequestHandler = async (req, res, next) => {
 
     const imagesCount = await Image.destroy({
       where: {
-        id: req.query.id,
+        id: req.query.id as string,
       },
     });
 

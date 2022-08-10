@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./dist/app.js",
     "rsa": "node ./dist/rsa.js",
-    "salt": "node ./dist/salt.js --size 100"
+    "salt": "node ./dist/salt.js --size 100",
+    "migrate": "node ./dist/migration.js --force"
   },
   "keywords": [],
   "author": "",
@@ -17,8 +18,10 @@
     "express": "^4.17.2",
     "helmet": "^5.0.1",
     "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
+    "react-scripts": "^4.0.3",
     "sequelize": "^6.13.0"
   },
   "devDependencies": {

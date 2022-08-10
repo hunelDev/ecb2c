@@ -2,14 +2,13 @@ import { Options } from 'sequelize';
 
 const config: Options = {
   host: 'localhost',
-  database: 'hunel',
+  database: 'b2c',
   username: 'hunel',
   password: 'hunel',
-  dialect: 'postgres',
-  port: 5432,
+  dialect: 'mysql',
+  port: 3306,
   logging: false,
   dialectOptions: {
-    dateString: true,
     typeCast: true,
   },
   timezone: '+03:00',
